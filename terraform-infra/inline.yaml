@@ -1,0 +1,34 @@
+apiVersion: tf.crossplane.io/v1alpha1
+kind: Workspace
+metadata:
+  name: wavefront-crossplane-inline-s3
+  annotations:
+spec:
+  forProvider:
+    source: Inline
+    module: |
+      resource "aws_s3_bucket" "paas-cp" {
+       bucket = "aws-crossplane-s3-inline-bucket"
+       tags = {
+       Name        = "arun"
+       Environment = "Dev"
+       }
+      }
+      resource "aws_s3_bucket_acl" "acl-test" {
+       bucket = aws_s3_bucket.paas-cp.id
+       acl    = "private"
+      }
+      terraform {
+       backend "s3" {
+        bucket = "aruntestings-1"
+        key    = "s3-test-inline"
+        region = "us-west-2"
+        shared_credentials_file = "aws-creds.ini"
+        workspace_key_prefix = "crossplane-test"
+       }
+      }
+  writeConnectionSecretToRef:
+    namespace: crossplane-system
+    name: terraform-workspace-arun-cp-4
+  providerConfigRef:
+    name: tfcon

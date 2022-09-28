@@ -1,0 +1,14 @@
+apiVersion: tf.crossplane.io/v1alpha1
+kind: Workspace
+metadata:
+  name: wavefront-crossplane-remote-s3
+  annotations:
+spec:
+  forProvider:
+    source: Remote
+    module: git::https://github.com/arunkumarmurugesan/crossplane-poc.git//terraform-infra/tf?ref=main
+  writeConnectionSecretToRef:
+    namespace: crossplane-system
+    name: terraform-workspace-arun-cp-remote-1
+  providerConfigRef:
+    name: tfcon
