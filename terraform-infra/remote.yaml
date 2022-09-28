@@ -6,7 +6,7 @@ metadata:
 spec:
   forProvider:
     source: Remote
-    module: git::https://github.com/arunkumarmurugesan/crossplane-poc.git//terraform-infra/tf?ref=main
+    module: git::https://github.com/arunkumarmurugesan26/crossplane-poc.git//terraform-infra/tf-files?ref=main
   writeConnectionSecretToRef:
     namespace: crossplane-system
     name: terraform-workspace-arun-cp-remote-1

@@ -11,7 +11,7 @@ spec:
     secretRef:
       namespace: crossplane-system
       name: aws-creds
-      key: creds
+      key: creds  
   - filename: .git-credentials
     source: Secret
     secretRef:
